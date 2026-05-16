@@ -4,9 +4,9 @@
 <p align="center">
   <strong>Drag-and-drop audio &amp; video inspection</strong>
   <br />
-  <strong>Version:</strong> 1.0
+  <strong>Version:</strong> 1.0.1
   <br />
-  <a href="https://github.com/sevmorris/JustIn/releases/latest/download/JustIn-v1.0.dmg"><strong>Download Latest (DMG)</strong></a>
+  <a href="https://github.com/sevmorris/JustIn/releases/latest/download/JustIn-v1.0.1.dmg"><strong>Download Latest (DMG)</strong></a>
 </p>
 
 **JustIn** answers a simple question fast: *what exactly is this file?* Drop one or
