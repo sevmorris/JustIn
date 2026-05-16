@@ -112,12 +112,15 @@ enum LoudnessAnalyzer {
 
                         if hopHistoryFrames.count == hopsPerBlock {
                             let totalHopFrames = hopHistoryFrames.reduce(0, +)
-                            var avgSq = 0.0
+                            // BS.1770-4: block loudness uses the SUM over
+                            // channels of G_c · mean-square_c. G_c = 1.0 for
+                            // mono and stereo. (Averaging instead of summing
+                            // makes stereo read 10·log10(2) ≈ 3 dB too low.)
+                            var blockSumSq = 0.0
                             for ch in 0..<channels {
-                                avgSq += hopHistorySS[ch].reduce(0, +) / Double(totalHopFrames)
+                                blockSumSq += hopHistorySS[ch].reduce(0, +) / Double(totalHopFrames)
                             }
-                            avgSq /= Double(channels)
-                            blockMeanSqs.append(avgSq)
+                            blockMeanSqs.append(blockSumSq)
                         }
                     }
                 }
@@ -127,12 +130,11 @@ enum LoudnessAnalyzer {
             if blockMeanSqs.isEmpty {
                 let trailingFrames = hopHistoryFrames.reduce(0, +) + hopFramesElapsed
                 if trailingFrames > 0 {
-                    var avgSq = 0.0
+                    var blockSumSq = 0.0
                     for ch in 0..<channels {
-                        avgSq += (hopHistorySS[ch].reduce(0, +) + hopChannelSumSq[ch]) / Double(trailingFrames)
+                        blockSumSq += (hopHistorySS[ch].reduce(0, +) + hopChannelSumSq[ch]) / Double(trailingFrames)
                     }
-                    avgSq /= Double(channels)
-                    blockMeanSqs.append(avgSq)
+                    blockMeanSqs.append(blockSumSq)
                 }
             }
 
