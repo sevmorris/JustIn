@@ -9,17 +9,21 @@ AVFoundation fields populate immediately; the loudness pass runs in the backgrou
 
 Related: [WaxOn/WaxOff](https://github.com/sevmorris/WaxOnWaxOff)
 
+---
+
 ## Supported formats
 WAV, AIFF, AIF, MP3, M4A, CAF, FLAC, MP4, M4V, MOV. Formats AVFoundation cannot natively decode (OGG, MKV, AVI) are not supported.
 
 ## Requirements
-- macOS 14.0 or later
-- Optional: `ffmpeg` and `ffprobe` on `PATH` for true peak, loudness range, and CBR/VBR detection (`brew install ffmpeg`)
+* macOS 14.0 or later
+* Optional: `ffmpeg` and `ffprobe` on `PATH` for true peak, loudness range, and CBR/VBR detection (`brew install ffmpeg`)
 
 ## Building
 ```bash
 xcodebuild -project JustIn.xcodeproj -scheme JustIn -configuration Release
 ```
 
-## License
+---
+
+### License
 [GNU GPL v3.0](LICENSE)
