@@ -6,6 +6,10 @@ struct JustInApp: App {
     @State private var viewModel = AnalyzerViewModel()
     @Environment(\.openWindow) private var openWindow
 
+    init() {
+        Task { await checkForUpdates(silent: true) }
+    }
+
     var body: some Scene {
         WindowGroup {
             ContentView(viewModel: viewModel)
@@ -27,7 +31,7 @@ struct JustInApp: App {
                 .keyboardShortcut("?", modifiers: .command)
 
                 Button("Check for Updates…") {
-                    open("https://github.com/sevmorris/JustIn/releases")
+                    Task { await checkForUpdates() }
                 }
 
                 Button("Support JustIn…") {
