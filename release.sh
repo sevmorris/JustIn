@@ -144,6 +144,8 @@ ok "DMG contains $DMG_VERSION"
 step "Updating README to ${TAG}"
 sed -i '' "s|JustIn-v[0-9][0-9.]*\.dmg|JustIn-${TAG}.dmg|g" "$PROJECT_DIR/README.md"
 sed -i '' "s|<strong>Version:</strong> [0-9][0-9.]*|<strong>Version:</strong> ${VERSION}|g" "$PROJECT_DIR/README.md"
+# Plain-text "Version X.Y.Z" form used by the simplified README.
+sed -i '' "s|Version [0-9][0-9.]*|Version ${VERSION}|g" "$PROJECT_DIR/README.md"
 if [[ -n "$(git status --porcelain)" ]]; then
     git add "$PROJECT_DIR/README.md"
     git commit -m "docs: update download link to ${TAG}"
