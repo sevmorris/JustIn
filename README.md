@@ -1,5 +1,5 @@
 # JustIn
-Media file analyzer for macOS · Version 1.0.3 · [Download DMG](https://github.com/sevmorris/JustIn/releases/latest/download/JustIn-v1.0.3.dmg)
+Media file analyzer for macOS · Version 1.0.4 · [Download DMG](https://github.com/sevmorris/JustIn/releases/latest/download/JustIn-v1.0.4.dmg)
 
 Drop one or more audio or video files onto the window to inspect their technical properties: format, duration, sample rate, channels, bit depth, codec, bitrate, file size, modification date, embedded metadata, and chapter markers. Video files also report resolution and color space.
 
