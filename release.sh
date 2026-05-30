@@ -157,9 +157,14 @@ fi
 # ── Tag and push ──────────────────────────────────────────────────────────────
 step "Tagging and pushing"
 git tag "$TAG"
-git push
-git push origin "$TAG"
-ok "Pushed $TAG"
+# Resolve the tracked remote/branch so this works from any branch (e.g. a
+# worktree branch whose name differs from its upstream).
+UPSTREAM=$(git rev-parse --abbrev-ref '@{upstream}')
+REMOTE="${UPSTREAM%%/*}"
+BRANCH="${UPSTREAM#*/}"
+git push "$REMOTE" "HEAD:$BRANCH"
+git push "$REMOTE" "$TAG"
+ok "Pushed $TAG to $REMOTE/$BRANCH"
 
 # ── GitHub release ────────────────────────────────────────────────────────────
 step "Creating GitHub release"
@@ -182,10 +187,11 @@ gh release create "$TAG" "$DMG" \
     --notes "$RELEASE_NOTES"
 ok "Release published"
 
-# ── Remove old releases ───────────────────────────────────────────────────────
-step "Removing old releases"
+# ── Remove old releases (keep the ${KEEP_RELEASES} most recent) ───────────────
+KEEP_RELEASES=5
+step "Removing old releases (keeping ${KEEP_RELEASES} most recent)"
 OLD_TAGS=$(gh release list --repo "$REPO" --limit 100 --json tagName \
-    --jq '.[].tagName' | grep -v "^${TAG}$" || true)
+    --jq '.[].tagName' | tail -n +$((KEEP_RELEASES + 1)) || true)
 if [[ -z "$OLD_TAGS" ]]; then
     ok "No old releases to remove"
 else
