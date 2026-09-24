@@ -1,4 +1,7 @@
 # JustIn
+
+> **Retired on 2026-09-24. Use [WaxOn/WaxOff](https://github.com/sevmorris/WaxOnWaxOff) instead,** which covers what JustIn did. JustIn gets no further updates, and this repository is archived and kept for reference. Its last release, v1.0.4, stays downloadable.
+
 Media file analyzer for macOS · Version 1.0.4 · [Download DMG](https://github.com/sevmorris/JustIn/releases/latest/download/JustIn-v1.0.4.dmg)
 
 Drop one or more audio or video files onto the window to inspect their technical properties: format, duration, sample rate, channels, bit depth, codec, bitrate, file size, modification date, embedded metadata, and chapter markers. Video files also report resolution and color space.
